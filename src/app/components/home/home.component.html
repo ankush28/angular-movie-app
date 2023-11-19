@@ -1,14 +1,14 @@
 <section *ngIf="bannerImage.length>0" class="w-full relative text-center">
     <img class="thumbnail h-[80vh] w-full object-cover" src="https://image.tmdb.org/t/p/original{{bannerImage}}" />
 
-    <div class="absolute top-1/2 left-1/3">
-        <p class="text-8xl font-bold  shadow-sm text-white">Welcome</p>
+    <div class="absolute top-1/2 w-full">
+        <p class="md:text-8xl text-4xl font-bold  shadow-sm text-white">Welcome</p>
         <p class="text-xl font-medium shadow-sm text-white">Millions of movies, TV shows and people to discover. Explore
             now.</p>
     </div>
 </section>
 <section *ngIf="movieData.length>0" class="">
-    <div class="w-9/12 mx-auto">
+    <div class="md:w-9/12 w-11/12 mx-auto">
         <div>
             <p class="text-white font-semibold text-3xl mb-5">Trending</p>
         </div>
@@ -16,7 +16,7 @@
             <ng-template *ngFor="let movies of movieData" carouselSlide>
                 <div class="mx-4">
                     <div>
-                        <img class="rounded-md h-96 w-auto drop-shadow-md object-cover"
+                        <img class="rounded-md md:h-96 h-52 w-auto drop-shadow-md object-cover"
                             src="https://image.tmdb.org/t/p/original{{movies.poster_path}}" />
                     </div>
                     <p class="text-white text-xl font-bold mt-2 truncate">{{movies.original_title }}</p>
@@ -31,7 +31,7 @@
 
 
 <section *ngIf="popularData.length>0" class="mt-24">
-    <div class="w-9/12 mx-auto">
+    <div class="md:w-9/12 w-11/12 mx-auto">
         <div>
             <p class="text-white font-semibold text-3xl mb-5">What's Popular</p>
         </div>
@@ -39,7 +39,7 @@
             <ng-template *ngFor="let popular of popularData" carouselSlide>
                 <div class="mx-4">
                     <div>
-                        <img class="rounded-md h-96 w-auto drop-shadow-md object-cover"
+                        <img class="rounded-md md:h-96 h-52 w-auto drop-shadow-md object-cover"
                             src="https://image.tmdb.org/t/p/original{{popular.poster_path}}" />
 
                     </div>
@@ -55,7 +55,7 @@
 
 
 <section *ngIf="popularData.length>0" class="mt-24">
-    <div class="w-9/12 mx-auto">
+    <div class="md:w-9/12 w-11/12 mx-auto">
         <div>
             <p class="text-white font-semibold text-3xl mb-5">Top Rated</p>
         </div>
@@ -63,7 +63,7 @@
             <ng-template *ngFor="let toprated of topratedData" carouselSlide>
                 <div class="mx-4">
                     <div>
-                        <img class="rounded-md h-96 w-auto drop-shadow-md object-cover"
+                        <img class="rounded-md md:h-96 h-52 w-auto drop-shadow-md object-cover"
                             src="https://image.tmdb.org/t/p/original{{toprated.poster_path}}" />
 
                     </div>
