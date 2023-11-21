@@ -9,13 +9,17 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RadialProgressComponent } from './components/radial-progress/radial-progress.component';
 import { DateFormatPipe } from './pipe/date-format.pipe';
-
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+import { MovieComponent } from './components/movie/movie.component';
+import { TvComponent } from './components/tv/tv.component';
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     RadialProgressComponent,
     DateFormatPipe,
+    MovieComponent,
+    TvComponent,
 
   ],
   imports: [
@@ -23,7 +27,8 @@ import { DateFormatPipe } from './pipe/date-format.pipe';
     AppRoutingModule,
     HttpClientModule,
     CarouselModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    NgxSkeletonLoaderModule
   ],
   providers: [],
   bootstrap: [AppComponent]

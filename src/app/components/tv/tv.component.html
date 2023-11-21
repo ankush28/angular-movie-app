@@ -1,0 +1,105 @@
+<section class="w-full top-0 absolute text-center opacity-50">
+    <img class="thumbnail h-[80vh] w-full object-cover"
+        src="https://image.tmdb.org/t/p/original{{movie.backdrop_path}}" />
+</section>
+
+<div *ngIf="tvLoader" class="relative z-20">
+
+    <div class="w-9/12 flex max-md:flex max-md:flex-col mt-24 mx-auto justify-center">
+        <div class="md:w-[400px] md:mr-16">
+            <img class="md:w-[400px] mx-auto rounded-md " src="https://image.tmdb.org/t/p/original{{movie.poster_path}}" />
+        </div>
+        <div class="md:w-1/2 mt-2">
+            <p class="text-4xl text-white font-semibold">{{movie.name}}</p>
+            <p class="text-xl text-slate-300 font-normal">{{movie.tagline}}</p>
+
+            <div class="flex flex-row gap-2 mt-3">
+                <p *ngFor="let genres of movie.genres" class="bg-pink-500 text-white px-1 rounded-md text-xs">
+                    {{genres.name}}</p>
+            </div>
+
+
+
+            <div class="mt-4">
+                <svg width="100" height="100" viewBox="-15 -15 150 150" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                    style="transform:rotate(-90deg)">
+                    <circle r="50" cx="60" cy="60" fill="transparent" stroke="#ffffff" stroke-width="9"
+                        stroke-dasharray="314px" stroke-dashoffset="0"></circle>
+                    <circle r="50" cx="60" cy="60" stroke="#01931e" stroke-width="10" stroke-linecap="butt"
+                        [attr.stroke-dashoffset]=borderPercetnage fill="transparent" stroke-dasharray="314px"></circle>
+                    <text x="37px" y="67px" fill="#ffffff" font-size="30px" font-weight="bold"
+                        style="transform:rotate(90deg) translate(0px, -116px)">{{roundedNumber}}</text>
+                </svg>
+
+                <div>
+
+                </div>
+            </div>
+            <p class="text-white text-2xl mt-4">Overview</p>
+            <p class="text-white text-lg mt-2">{{movie.overview}}</p>
+            <div class="flex gap-6 mt-6">
+                <p class="text-white font-semibold">Status: <span class="text-gray-400 ml-2">{{movie.status}}</span></p>
+                <p class="text-white font-semibold">Release Date: <span class="text-gray-400 ml-2">{{movie.last_air_date | dateFormat }}</span></p>
+            </div>
+            <hr class="mt-5 opacity-10">
+            <div class="flex gap-6 mt-6">
+                <p class="text-white font-semibold">Writer: <span *ngFor="let writer of writer"  class="text-gray-400 ml-2">{{writer}},</span></p>
+            </div>
+            <hr class="mt-5 opacity-10">
+        </div>
+    </div>
+
+
+
+    <section *ngIf="similarData.length>0" class="mt-24">
+        <div class="md:w-9/12 w-11/12 mx-auto">
+            <div>
+                <p class="text-white font-semibold text-3xl mb-5">Top Rated</p>
+            </div>
+            <owl-carousel-o [options]="customOptions">
+                <ng-template *ngFor="let toprated of similarData" carouselSlide>
+                    <div [routerLink]="['/tv', toprated.id]" class="mx-4">
+                        <div>
+                            <img class="rounded-md md:h-96 h-52 w-auto drop-shadow-md object-cover"
+                                src="https://image.tmdb.org/t/p/original{{toprated.poster_path}}" />
+    
+                        </div>
+                        <p class="text-white text-xl font-bold mt-2 truncate">{{toprated.original_name ||
+                            toprated.original_title }}</p>
+                        <p class="text-white text-base font-medium">{{toprated.first_air_date || toprated.release_date |
+                            dateFormat}}</p>
+                    </div>
+    
+                </ng-template>
+            </owl-carousel-o>
+        </div>
+    </section>
+
+    <section *ngIf="recommendData.length>0" class="mt-24">
+        <div class="md:w-9/12 w-11/12 mx-auto">
+            <div>
+                <p class="text-white font-semibold text-3xl mb-5">Top Rated</p>
+            </div>
+            <owl-carousel-o [options]="customOptions">
+                <ng-template *ngFor="let toprated of recommendData" carouselSlide>
+                    <div [routerLink]="['/tv', toprated.id]" class="mx-4">
+                        <div>
+                            <img class="rounded-md md:h-96 h-52 w-auto drop-shadow-md object-cover"
+                                src="https://image.tmdb.org/t/p/original{{toprated.poster_path}}" />
+    
+                        </div>
+                        <p class="text-white text-xl font-bold mt-2 truncate">{{toprated.original_name ||
+                            toprated.original_title }}</p>
+                        <p class="text-white text-base font-medium">{{toprated.first_air_date || toprated.release_date |
+                            dateFormat}}</p>
+                    </div>
+    
+                </ng-template>
+            </owl-carousel-o>
+        </div>
+    </section>
+
+    <div  class="bg-transparent p-4 mt-24 text-center">
+        <p class="text-white font-semibold">Made with ❤️ by Ankush</p>
+    </div>
+</div>

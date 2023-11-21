@@ -9,7 +9,8 @@ import { DateFormatPipe } from 'src/app/pipe/date-format.pipe';
   providers: [DateFormatPipe]
 })
 export class HomeComponent {
-
+  roundedNumber: any;
+  borderPercetnage: string = '52px';
   "genres": [
       {
         "id": 28,
@@ -101,21 +102,17 @@ export class HomeComponent {
     pullDrag: true,
     dots: false,
     responsive : {
-      // breakpoint from 0 up
       0 : {
         items: 2
       },
-      // breakpoint from 480 up
       480 : {
-        items: 2
+        items: 3
       },
-      // breakpoint from 768 up
       768 : {
         items: 5
       }
   }
   }
-  currentProgress: number = 5; // Set initial progress out of 10
 
   constructor(private movieapiservice : MovieapiService){
     this.getBanner();
@@ -123,6 +120,8 @@ export class HomeComponent {
     this.getPopular('movie');
     this.getTopRated('movie')
   }
+
+  
 
   getBanner(){
     this.movieapiservice.getBanner().subscribe((res: any) => {
@@ -133,23 +132,61 @@ export class HomeComponent {
       }
     })
   }
-  getTrending(time: string){
-    this.movieapiservice.getTrending(time).subscribe((res: any) => {
-      console.log(res);
-      this.movieData = res.results;
-    })
-  }
+  trendingBool: Boolean = true;
+  activeButton: string = 'day';
+  getTrending(time: string) {
+  this.activeButton = time;
+  this.movieapiservice.getTrending(time).subscribe((res: any) => {
+    if (res.results) {
+      
+      this.movieData = res.results.map((item: any) => {
+        item.roundedValue = this.roundToDecimal(item.vote_average, 1)
+        item.calculatedValue = Math.abs(Math.floor((item.roundedValue * 3.14 * 10) - 314));
+        this.trendingBool = false;
+       return item;
+      });
+    }
+    console.log(this.movieData)
+  });
+}
+roundToDecimal(value: number, decimalPlaces: number): number {
+  const multiplier = Math.pow(10, decimalPlaces);
+  return Math.round(value * multiplier) / multiplier;
+}
+  activePopular: string = 'movie'
+  popularboolean: Boolean = true;
   getPopular(type: string){
+    this.activePopular = type;
     this.movieapiservice.getPopular(type).subscribe((res: any) => {
-      this.popularData = res.results;
+      if (res.results) {
+
+        this.popularData = res.results.map((item: any) => {
+          item.roundedValue = this.roundToDecimal(item.vote_average, 1)
+          item.calculatedValue = Math.abs(Math.floor((item.roundedValue * 3.14 * 10) - 314));
+          this.popularboolean = false;
+         return item;
+        });
+      }
       console.log(this.popularData)
     })
   }
-
+  getCategoryRoute(category: string): string {
+    return category === 'movie' ? '/movie' : '/tv';
+}
+activeRated: string = 'movie'
+ratedBoolean: Boolean = true;
   getTopRated(type: string){
+    this.activeRated = type;
     this.movieapiservice.getTopRated(type).subscribe((res: any) => {
-      this.topratedData = res.results;
-      console.log(this.topratedData)
+      if (res.results) {
+        this.trendingBool = false;
+        this.topratedData = res.results.map((item: any) => {
+          item.roundedValue = this.roundToDecimal(item.vote_average, 1)
+          item.calculatedValue = Math.abs(Math.floor((item.roundedValue * 3.14 * 10) - 314));
+          this.ratedBoolean = false;
+         return item;
+        });
+      }
     })
   }
 }

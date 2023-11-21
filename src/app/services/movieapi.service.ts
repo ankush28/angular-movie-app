@@ -34,5 +34,36 @@ export class MovieapiService {
     const url = `https://api.themoviedb.org/3/${type}/top_rated??language=en-US&page=1`;
     return this.http.get(url, this.options);
   }
-
+  getMovie(id: number): Observable<any>{
+    const url = `https://api.themoviedb.org/3/movie/${id}?language=en-US`;
+    return this.http.get(url, this.options);
+  }
+  getTV(id: number): Observable<any>{
+    const url = `https://api.themoviedb.org/3/tv/${id}?language=en-US`;
+    return this.http.get(url, this.options);
+  }
+  getTVCredit(id: number): Observable<any>{
+    const url = `https://api.themoviedb.org/3/tv/${id}/credits?language=en-US`;
+    return this.http.get(url, this.options);
+  }
+  getTVSimilar(id: number): Observable<any>{
+    const url = `https://api.themoviedb.org/3/tv/${id}/similar?language=en-US`;
+    return this.http.get(url, this.options);
+  }
+  getTVRecommend(id: number): Observable<any>{
+    const url = `https://api.themoviedb.org/3/tv/${id}/recommendations?language=en-US`;
+    return this.http.get(url, this.options);
+  }
+  getCredit(id: number): Observable<any>{
+    const url = `https://api.themoviedb.org/3/movie/${id}/credits?language=en-US`;
+    return this.http.get(url, this.options);
+  }
+  getSimilar(id: number): Observable<any>{
+    const url = `https://api.themoviedb.org/3/movie/${id}/similar?language=en-US`;
+    return this.http.get(url, this.options);
+  }
+  getRecommend(id: number): Observable<any>{
+    const url = `https://api.themoviedb.org/3/movie/${id}/recommendations?language=en-US`;
+    return this.http.get(url, this.options);
+  }
 }
